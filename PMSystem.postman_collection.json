@@ -1,0 +1,354 @@
+{
+    "info": {
+        "name": "Project Management System API",
+        "_postman_id": "b3f8d4b4-1234-4f5c-bc11-6789abcd1234",
+        "description": "Postman Collection for Project Management System Backend Developer Skill Test",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/register",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "register"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\",\n  \"phone\": \"123456789\",\n  \"role\": \"user\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "login"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/logout",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "logout"]
+                        }
+                    }
+                },
+                {
+                    "name": "Me",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/me",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "me"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Projects",
+            "item": [
+                {
+                    "name": "Get All Projects",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/projects",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "projects"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Project By ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/projects/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "projects", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Project (Admin Only)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/projects",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "projects"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"New Project\",\n  \"description\": \"Project description\",\n  \"start_date\": \"2025-10-01\",\n  \"end_date\": \"2025-10-30\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Project (Admin Only)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/projects/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "projects", "1"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Updated Project\",\n  \"description\": \"Updated description\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Project (Admin Only)",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/projects/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "projects", "1"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Tasks",
+            "item": [
+                {
+                    "name": "Get Tasks By Project",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/projects/1/tasks",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "projects", "1", "tasks"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Task By ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/tasks/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "tasks", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Task (Manager Only)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/projects/1/tasks",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "projects", "1", "tasks"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Task title\",\n  \"description\": \"Task details\",\n  \"status\": \"pending\",\n  \"due_date\": \"2025-10-10\",\n  \"assigned_to\": 5\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Task",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/tasks/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "tasks", "1"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Updated Task\",\n  \"status\": \"in-progress\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Task (Manager Only)",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/tasks/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "tasks", "1"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Comments",
+            "item": [
+                {
+                    "name": "Add Comment",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/tasks/1/comments",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "tasks", "1", "comments"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"body\": \"This is a comment\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Comments By Task",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/tasks/1/comments",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "tasks", "1", "comments"]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        { "key": "base_url", "value": "http://127.0.0.1:8000" },
+        { "key": "token", "value": "" }
+    ]
+}

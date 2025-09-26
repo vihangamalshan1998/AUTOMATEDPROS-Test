@@ -1,82 +1,137 @@
 # Project Management System (PMS) - Laravel API
 
 ## Setup
-1. Clone & install:
-git clone <repo>
+
+1. **Clone & Install**
+
+```bash
+git clone <repository_url>
 cd pm-system
 composer install
 npm install
 npm run build
 cp .env.example .env
 php artisan key:generate
+```
 
-markdown
-Copy code
-2. Configure DB in `.env`.
-3. Run migrations & seed:
+2. **Configure Database**
+
+* Edit `.env` file and set your database credentials:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_db_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
+```
+
+3. **Run Migrations & Seed Data**
+
+```bash
 php artisan migrate --seed
+```
 
-markdown
-Copy code
-4. Serve:
+4. **Serve the Application**
+
+```bash
 php artisan serve
+```
 
-markdown
-Copy code
+---
 
-## Seeded data
-- Users: 3 admins, 3 managers, 5 users
-- Projects: 5
-- Tasks: 10
-- Comments: 10
+## Seeded Data
+
+* **Users:** 3 Admins, 3 Managers, 5 Users
+* **Projects:** 5
+* **Tasks:** 10
+* **Comments:** 10
+
+---
 
 ## API
-Use Postman collection `PMSystem.postman_collection.json`. Authenticate with `/api/login`, set header:
-Authorization: Bearer <token>
-Content-Type: application/json
 
-makefile
-Copy code
+Use the Postman collection `PMSystem.postman_collection.json`.
 
-Endpoints: (see collection)
-POST /api/register, POST /api/login, POST /api/logout, GET /api/me
-GET /api/projects, GET /api/projects/{id}
-POST /api/projects (admin), PUT/DELETE /api/projects/{id} (admin)
-GET /api/projects/{id}/tasks, POST /api/projects/{id}/tasks (manager)
-PUT /api/tasks/{id} (manager/assignee), DELETE /api/tasks/{id} (manager)
-POST /api/tasks/{id}/comments, GET /api/tasks/{id}/comments
+### Authentication
 
-makefile
-Copy code
+* **Login:** `POST /api/login`
+* **Register:** `POST /api/register`
+* **Logout:** `POST /api/logout`
+* **Current User:** `GET /api/me`
 
-## Tests
-Run:
+> **Headers for authenticated requests:**
+> `Authorization: Bearer <token>`
+> `Content-Type: application/json`
+
+### Endpoints
+
+* **Projects**
+
+  * `GET /api/projects`
+  * `GET /api/projects/{id}`
+  * `POST /api/projects` (Admin only)
+  * `PUT /api/projects/{id}` (Admin only)
+  * `DELETE /api/projects/{id}` (Admin only)
+
+* **Tasks**
+
+  * `GET /api/projects/{id}/tasks`
+  * `POST /api/projects/{id}/tasks` (Manager only)
+  * `PUT /api/tasks/{id}` (Manager / Assignee)
+  * `DELETE /api/tasks/{id}` (Manager only)
+
+* **Comments**
+
+  * `GET /api/tasks/{id}/comments`
+  * `POST /api/tasks/{id}/comments`
+
+---
+
+## Running Tests
+
+```bash
 php artisan test
+```
 
-markdown
-Copy code
+---
 
 ## Notes
-- Queues: set `QUEUE_CONNECTION=database` and run `php artisan queue:work` to process email jobs.
-- Caching: projects list cached for 60s per filter page.
-10. Final checklist before submission
-Ensure app/Providers/RouteServiceProvider.php exists (default) and routes loaded.
 
-Ensure app/Http/Kernel.php contains role & log.request in $routeMiddleware.
+* **Queues:** Set `QUEUE_CONNECTION=database` in `.env` and run:
 
-Ensure User has HasApiTokens.
+```bash
+php artisan queue:work
+```
 
-composer dump-autoload and clear caches:
+to process email jobs.
 
-bash
-Copy code
+* **Caching:** Projects list cached for 60s per filter page.
+
+* **Middleware:** Ensure `app/Http/Kernel.php` contains `role` & `log.request` in `$routeMiddleware`.
+
+* **User Model:** Ensure `HasApiTokens` trait is used.
+
+* **Clear & Optimize Cache**
+
+```bash
 composer dump-autoload
 php artisan config:clear
 php artisan route:clear
 php artisan cache:clear
 php artisan optimize:clear
-Run migrations and seed: php artisan migrate --seed
+```
 
-Run tests: php artisan test
+* **Migrate & Seed**
 
-Export Postman collection file and include README.md in your submission zip.
+```bash
+php artisan migrate --seed
+```
+
+---
+
+## Submission Checklist
+
+* Ensure `app/Providers/RouteServiceProvider.php` exists and routes are loaded.
+* Include `PMSystem.postman_collection.json` and this `README.md` in your submission zip.

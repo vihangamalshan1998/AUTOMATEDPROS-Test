@@ -131,7 +131,3 @@ php artisan migrate --seed
 
 ---
 
-## Submission Checklist
-
-* Ensure `app/Providers/RouteServiceProvider.php` exists and routes are loaded.
-* Include `PMSystem.postman_collection.json` and this `README.md` in your submission zip.
